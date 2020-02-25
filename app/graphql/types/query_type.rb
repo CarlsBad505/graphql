@@ -4,7 +4,7 @@ module Types
     field :all_users, [UserType], null: false
 
     def all_links
-      Link.all
+      Link.all.includes(:votes)
     end
 
     def all_users
