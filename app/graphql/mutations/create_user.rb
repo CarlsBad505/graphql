@@ -15,6 +15,14 @@ module Mutations
         email: auth_provider&.dig(:credentials, :email),
         password: auth_provider&.dig(:credentials, :password)
       )
+    rescue => e
+      raise GraphQL::ExecutionError, "Invalid input: #{e.record.errors.full_messages.join(', ')}", caller
     end
+
+    def caller
+      puts "Log Error..."
+      # Rails.logger the issue as a callback
+    end
+
   end
 end
